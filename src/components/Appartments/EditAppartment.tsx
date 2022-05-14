@@ -30,7 +30,7 @@ const EditAppartment = () => {
   if (loadResult.loading) return <div>"Loading..."</div>;
 
   const handleSubmit = () => {
-    if(appartment.city) {
+    if(appartment.city && appartment.address) {
       editAppartment({
         variables: {
           input: {
@@ -49,7 +49,7 @@ const EditAppartment = () => {
         navigate("/appartments");
       });
     } else{
-      alert("Name is required, sorry I wish I were more user friendly :(")
+      alert("City/Appartment is required, sorry I wish I were more user friendly :(")
     }
   };
   return (

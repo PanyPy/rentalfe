@@ -15,7 +15,7 @@ const CreateAppartment = () => {
   const [createAppartment, createdAppartment] = useMutation<CreateAppartmentMutation, CreateAppartmentMutationVariables>(CREATE_APPARTMENT);
 
   const handleSubmit = () => {
-    if(appartment.city) {
+    if(appartment.city && appartment.address) {
       createAppartment({
         variables: {
           input: {
@@ -29,7 +29,7 @@ const CreateAppartment = () => {
         navigate("/appartments");
       });
     } else{
-      alert("Name is required, sorry I wish I were more user friendly :(")
+      alert("City/Address is required, sorry I wish I were more user friendly :(")
     }
   };
 
