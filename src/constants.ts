@@ -1,1 +1,1 @@
-export const API_URL =  "http://localhost:3000/graphql"; //"https://xplace.herokuapp.com/graphql"
+export const API_URL =  "https://rentalbe.herokuapp.com/graphql"
