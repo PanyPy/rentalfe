@@ -12,6 +12,8 @@ const AppartmentsPage = () => {
   const [deleteAppartment, deletedAppartment] = useMutation<DeleteAppartmentMutation, DeleteAppartmentMutationVariables>(DELETE_APPARTMENT, {refetchQueries: [{ query: GET_APPARTMENTS }]});
   const [filterCity, setFilterCity] = useState("");
   const [filterAddress, setFilterAddress] = useState("");
+  const [filterRooms, setFilterRooms] = useState(0);
+  const [filterPrice, setFilterPrice] = useState(0);
 
   if (getTasksQuery.loading) return <p>Loading...</p>;
   if (getTasksQuery.error) return <p>Error :(.. Please don't mess the database, just clean up and restart (this is not a real worl app)</p>;
@@ -24,7 +26,9 @@ const AppartmentsPage = () => {
   const appartmentLists = 
     getTasksQuery.data?.appartments
     .filter(appartment => (appartment.address?.toLowerCase().includes(filterAddress)))
-    .filter(appartment => (appartment.city.toLowerCase().includes(filterCity)));
+    .filter(appartment => (appartment.city.toLowerCase().includes(filterCity)))
+    .filter(appartment => (filterRooms === 0 || appartment.rooms == filterRooms))
+    .filter(appartment => (filterPrice === 0 || appartment.price > filterPrice));
 
   return (
     <Container>
@@ -43,7 +47,7 @@ const AppartmentsPage = () => {
               </p>
 
               <Row>
-                <Col md ="6">
+                <Col md ="3">
                   <Form.Group className="mb-3">
                     <Form.Label>Search City</Form.Label>
                     <Form.Control 
@@ -58,7 +62,7 @@ const AppartmentsPage = () => {
                     />
                   </Form.Group>
                 </Col>
-                <Col md ="6">
+                <Col md ="3">
                 <Form.Group className="mb-3">
                   <Form.Label>Search Address</Form.Label>
                     <Form.Control 
@@ -69,6 +73,36 @@ const AppartmentsPage = () => {
                       onChange={(e)=>{
                         const newValue = e.target.value;
                         setFilterAddress(newValue)
+                      }} 
+                    />
+                  </Form.Group>
+                </Col>
+                <Col md ="3">
+                  <Form.Group className="mb-3">
+                    <Form.Label>Search by Rooms</Form.Label>
+                    <Form.Control 
+                      required
+                      type="number" 
+                      placeholder="Search by Rooms" 
+                      value={filterRooms || 0}
+                      onChange={(e)=>{
+                        const newValue = e.target.value;
+                        setFilterRooms(Number(newValue))
+                      }} 
+                    />
+                  </Form.Group>
+                </Col>
+                <Col md ="3">
+                  <Form.Group className="mb-3">
+                    <Form.Label>Search By Price ></Form.Label>
+                    <Form.Control 
+                      required
+                      type="number" 
+                      placeholder="Search by Rooms" 
+                      value={filterPrice || 0}
+                      onChange={(e)=>{
+                        const newValue = e.target.value;
+                        setFilterPrice(Number(newValue))
                       }} 
                     />
                   </Form.Group>
