@@ -94,7 +94,7 @@ const AppartmentsPage = () => {
                 </Col>
                 <Col md ="3">
                   <Form.Group className="mb-3">
-                    <Form.Label>Search By Price ></Form.Label>
+                    <Form.Label>Search By Price (greater)</Form.Label>
                     <Form.Control 
                       required
                       type="number" 
