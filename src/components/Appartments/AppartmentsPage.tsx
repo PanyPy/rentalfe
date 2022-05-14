@@ -25,8 +25,8 @@ const AppartmentsPage = () => {
 
   const appartmentLists = 
     getTasksQuery.data?.appartments
-    .filter(appartment => (appartment.address?.toLowerCase().includes(filterAddress)))
-    .filter(appartment => (appartment.city.toLowerCase().includes(filterCity)))
+    .filter(appartment => (appartment.address?.toLowerCase().includes(filterAddress.toLowerCase())))
+    .filter(appartment => (appartment.city.toLowerCase().includes(filterCity.toLowerCase())))
     .filter(appartment => (filterRooms === 0 || appartment.rooms == filterRooms))
     .filter(appartment => (filterPrice === 0 || appartment.price > filterPrice));
 
